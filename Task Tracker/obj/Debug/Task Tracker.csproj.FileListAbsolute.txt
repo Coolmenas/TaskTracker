@@ -1,0 +1,10 @@
+c:\users\arma\documents\visual studio 2013\Projects\Task Tracker\Task Tracker\bin\Debug\Task Tracker.exe.config
+C:\Users\Arma\Documents\Visual Studio 2013\Projects\Task Tracker\Task Tracker\bin\Debug\Task Tracker.exe
+C:\Users\Arma\Documents\Visual Studio 2013\Projects\Task Tracker\Task Tracker\bin\Debug\Task Tracker.pdb
+C:\Users\Arma\Documents\Visual Studio 2013\Projects\Task Tracker\Task Tracker\obj\Debug\Task Tracker.csprojResolveAssemblyReference.cache
+C:\Users\Arma\Documents\Visual Studio 2013\Projects\Task Tracker\Task Tracker\obj\Debug\Task_Tracker.Form1.resources
+C:\Users\Arma\Documents\Visual Studio 2013\Projects\Task Tracker\Task Tracker\obj\Debug\Task_Tracker.NewWorker.resources
+C:\Users\Arma\Documents\Visual Studio 2013\Projects\Task Tracker\Task Tracker\obj\Debug\Task_Tracker.Properties.Resources.resources
+C:\Users\Arma\Documents\Visual Studio 2013\Projects\Task Tracker\Task Tracker\obj\Debug\Task Tracker.csproj.GenerateResource.Cache
+C:\Users\Arma\Documents\Visual Studio 2013\Projects\Task Tracker\Task Tracker\obj\Debug\Task Tracker.exe
+C:\Users\Arma\Documents\Visual Studio 2013\Projects\Task Tracker\Task Tracker\obj\Debug\Task Tracker.pdb
