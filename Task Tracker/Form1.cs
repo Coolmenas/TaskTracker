@@ -22,5 +22,10 @@ namespace Task_Tracker
             NewWorker nW = new NewWorker();
             nW.Show();
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
