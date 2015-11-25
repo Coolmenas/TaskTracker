@@ -18,3 +18,5 @@ C:\Users\Arma\Documents\Visual Studio 2013\Projects\TaskTracker\Task Tracker\obj
 C:\Users\Arma\Documents\Visual Studio 2013\Projects\TaskTracker\Task Tracker\obj\Debug\Task_Tracker.NewWorker.resources
 C:\Users\Arma\Documents\Visual Studio 2013\Projects\TaskTracker\Task Tracker\obj\Debug\Task_Tracker.Properties.Resources.resources
 C:\Users\Arma\Documents\Visual Studio 2013\Projects\TaskTracker\Task Tracker\obj\Debug\Task Tracker.csproj.GenerateResource.Cache
+C:\Users\Arma\Documents\Visual Studio 2013\Projects\TaskTracker\Task Tracker\bin\Debug\Database1.mdf
+C:\Users\Arma\Documents\Visual Studio 2013\Projects\TaskTracker\Task Tracker\bin\Debug\Database1_log.ldf

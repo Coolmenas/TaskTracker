@@ -16,5 +16,11 @@ namespace Task_Tracker
         {
             InitializeComponent();
         }
+
+        private void workerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewWorker nW = new NewWorker();
+            nW.Show();
+        }
     }
 }
