@@ -27,5 +27,11 @@ namespace Task_Tracker
         {
             this.Close();
         }
+
+        private void teamToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewTeam nT = new NewTeam();
+            nT.Show();
+        }
     }
 }

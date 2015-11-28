@@ -34,6 +34,7 @@
             this.workerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.teamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.taskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,8 +60,9 @@
             // addNewToolStripMenuItem
             // 
             this.addNewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.teamToolStripMenuItem,
             this.workerToolStripMenuItem,
-            this.teamToolStripMenuItem});
+            this.taskToolStripMenuItem});
             this.addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
             this.addNewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addNewToolStripMenuItem.Text = "Add New";
@@ -68,15 +70,16 @@
             // workerToolStripMenuItem
             // 
             this.workerToolStripMenuItem.Name = "workerToolStripMenuItem";
-            this.workerToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.workerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.workerToolStripMenuItem.Text = "Worker";
             this.workerToolStripMenuItem.Click += new System.EventHandler(this.workerToolStripMenuItem_Click);
             // 
             // teamToolStripMenuItem
             // 
             this.teamToolStripMenuItem.Name = "teamToolStripMenuItem";
-            this.teamToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.teamToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.teamToolStripMenuItem.Text = "Team";
+            this.teamToolStripMenuItem.Click += new System.EventHandler(this.teamToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -84,6 +87,12 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // taskToolStripMenuItem
+            // 
+            this.taskToolStripMenuItem.Name = "taskToolStripMenuItem";
+            this.taskToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.taskToolStripMenuItem.Text = "Task";
             // 
             // Form1
             // 
@@ -109,6 +118,7 @@
         private System.Windows.Forms.ToolStripMenuItem workerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teamToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem taskToolStripMenuItem;
     }
 }
 
