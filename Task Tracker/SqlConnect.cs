@@ -16,7 +16,7 @@ namespace Task_Tracker
 
         public   SqlConnect()
         {
-            _connection = new MySqlConnection("server=localhost;user id=armantas;Password=armantas;database=task_manager;persist security info=False");
+            _connection = new MySqlConnection("server=localhost;user id=armantas;Password=armantas;database=task_manager;persist security info=False;Convert Zero Datetime=True");
          
         }
 
@@ -65,6 +65,23 @@ namespace Task_Tracker
                 command.ExecuteNonQuery();
             }
             catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public void NonQueryEx(string message)
+        {
+            try
+            {
+                _connection.Open();
+                command.ExecuteNonQuery();
+                MessageBox.Show(message);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

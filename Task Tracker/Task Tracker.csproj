@@ -67,6 +67,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewTask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewTask.Designer.cs">
+      <DependentUpon>NewTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewTeam.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,9 @@
     <Compile Include="SqlConnect.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewTask.resx">
+      <DependentUpon>NewTask.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewTeam.resx">
       <DependentUpon>NewTeam.cs</DependentUpon>

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+//using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -62,6 +62,11 @@ namespace Task_Tracker
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            if (verifyData() == false)
+            {
+                return;
+            }
             con.SqlQuery("INSERT INTO workers (Name, Surname, Born, Joined, Telephone, Address, TeamId) VALUES(@NameP, @SurnameP, @BornP, @JoinedP, @TelephoneP, @AddressP, @TeamIdP)");
             con.command.Parameters.AddWithValue("@NameP", textBox1.Text.Trim());
             con.command.Parameters.AddWithValue("@SurnameP", textBox2.Text.Trim());
@@ -70,14 +75,19 @@ namespace Task_Tracker
             con.command.Parameters.AddWithValue("@TelephoneP", textBox3.Text.Trim());
             con.command.Parameters.AddWithValue("@AddressP", textBox4.Text.Trim());
             con.command.Parameters.AddWithValue("@TeamIdP", comboBox1.SelectedValue);
-            
-            con.NonQueryEx();
-            MessageBox.Show("Team " + textBox1.Text.Trim() + " created");
+
+            con.NonQueryEx("Worker " + textBox1.Text.Trim() + " created");
+            //MessageBox.Show("Worker " + textBox1.Text.Trim() + " created");
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private bool verifyData()
         {
-            MessageBox.Show(((KeyValuePair<string, string>)comboBox1.SelectedItem).Key.ToString());
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("Enter a name for the task");
+                return false;
+            }
+            else return true;
         }
 
     }
