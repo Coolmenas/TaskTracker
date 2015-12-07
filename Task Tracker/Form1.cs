@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,21 +21,30 @@ namespace Task_Tracker
             InitializeComponent();
             con = new SqlConnect();
             LoadTreeView();
-            
-            
         }
 
-        private void LoadDataGridView()
+        private void LoadDataGridView(int level)
         {
-            string level = "teams";
+            DataTable dt = new DataTable();
+            if (level == 0)
+            {
+                con.SqlQuery("SELECT Name, Surname, Telephone FROM workers WHERE TeamId  = \"" + treeView1.SelectedNode.Name.ToString() + '"');
+                reader = con.QueryEx();
+            }
+            else if (level == 1)
+            {
+                con.SqlQuery("SELECT  Name, Description, DateDue FROM tasks WHERE WorkerId  = \"" + treeView1.SelectedNode.Name.ToString() + '"');
+                reader = con.QueryEx();
+            }
+            else
+            {
+                con.SqlQuery("SELECT  Name, Description, DateDue FROM tasks WHERE WorkerId  = \"" + treeView1.SelectedNode.Parent.Name.ToString() + '"');
+                reader = con.QueryEx();
+            }
             //if (treeView1.SelectedNode.Level == 0) level = "teams";
            // else if (treeView1.SelectedNode.Level == 1) level = "workers";
            // else level = "tasks";
-            con.SqlQuery("SELECT teams.*, workers.*, tasks.* " +
-                         "FROM teams INNER JOIN workers on workers.TeamId= teams.Id "+
-                         " INNER JOIN tasks on workers.TeamId= teams.Id "+
-                         "WHERE " + level + ".id = \"" + treeView1.SelectedNode.Name.ToString() + '"');
-            reader = con.QueryEx();
+           
 
             //Dictionary<string, string> dataGridViewValues = new Dictionary<string, string>();
             //while (reader.Read())
@@ -43,15 +53,16 @@ namespace Task_Tracker
             //    //treeView1.Nodes[reader["TeamId"].ToString()].Nodes[reader["WorkerId"].ToString()].Nodes.Add(reader["Id"].ToString(), reader["Name"].ToString());
             //    //MessageBox.Show(reader["Id"].ToString());
             //}
-            DataTable dt = new DataTable();
+
             dt.Load(reader);
             con.ConnectionClose();
             dataGridView1.DataSource = dt;
             //throw new NotImplementedException();
         }
 
-        private void LoadTreeView()
+        public void LoadTreeView()
         {
+            treeView1.Nodes.Clear();
             //-----------------------------------------------Fill first level--------------------------------------------------------------------
             con.SqlQuery("SELECT * FROM TEAMS ");
             reader = con.QueryEx();
@@ -115,47 +126,75 @@ namespace Task_Tracker
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            LoadDataGridView();
+            
            // MessageBox.Show(treeView1.SelectedNode.Name.ToString());
-            DataTable dt = new DataTable();
             var selectedNode = treeView1.SelectedNode;
             if (selectedNode.Level == 0)
             {
-                
-                con.SqlQuery("SELECT * FROM teams ");
-                reader = con.QueryEx();
-
-                //Dictionary<string, string> dataGridViewValues = new Dictionary<string, string>();
-                //while (reader.Read())
-                //{
-                //    dataGridViewValues.Add(reader["Id"].ToString(), reader["Name"].ToString());
-                //    //treeView1.Nodes[reader["TeamId"].ToString()].Nodes[reader["WorkerId"].ToString()].Nodes.Add(reader["Id"].ToString(), reader["Name"].ToString());
-                //    //MessageBox.Show(reader["Id"].ToString());
-                //}
-
-                dt.Load(reader);  
-                con.ConnectionClose();
-               // dataGridView1.DataSource = dt;
-                
-                ////use binding source to hold dummy data
-                //BindingSource binding = new BindingSource();
-                //binding.DataSource = dataGridViewValues;
-
-                ////bind datagridview to binding source
-                //dataGridView1.DataSource = binding;
-                //MessageBox.Show("team");
+                LoadDataGridView(selectedNode.Level);  
             }
             else
             {
                 if (selectedNode.Level == 1)
                 {
-                    
+                    LoadDataGridView(selectedNode.Level);
                 }
                 else
                 {
-                    MessageBox.Show("task");
+                    LoadDataGridView(selectedNode.Level);
+                    //MessageBox.Show("task");
                 }
             }    
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            printDocument1.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
+            printDocument1.Print();
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            Bitmap bm = new Bitmap(this.dataGridView1.Width, this.dataGridView1.Height);
+            dataGridView1.DrawToBitmap(bm, new Rectangle(0, 0, this.dataGridView1.Width, this.dataGridView1.Height));
+            e.Graphics.DrawImage(bm, 0, 0);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode.Level == 0)
+            {
+                NewTeam editTeam = new NewTeam(treeView1.SelectedNode.Name);
+                editTeam.Show();
+            }
+            else if (treeView1.SelectedNode.Level == 1)
+            {
+                EditWorker editWorker = new EditWorker(treeView1.SelectedNode.Name);
+                editWorker.Show();
+            }
+            else
+            {
+
+            }
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {   
+        }
+
+        public void refresh()
+        {
+            int id = treeView1.SelectedNode.Index;
+            LoadTreeView();
+            try
+            {
+                treeView1.SelectedNode = treeView1.Nodes[id];
+            }
+            catch (Exception)
+            {
+                
+            }
+            
         }
     }
 }

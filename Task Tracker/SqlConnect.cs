@@ -37,23 +37,11 @@ namespace Task_Tracker
                 //use a DataReader to process each record
                 msqlReader = command.ExecuteReader();
                 return msqlReader;
-               // while (msqlReader.Read())
-               // {
-               //     MessageBox.Show(msqlReader["Name"].ToString());
-               //     //do something with each record
-               // }
             }
             catch (Exception er)
             {
                 MessageBox.Show(er.Message);
-                //do something with the exception
             }
-            //finally
-            //{
-            //    //always close the connection
-            //    _connection.Close();
-                
-            //}
             return msqlReader;
         }
 
@@ -96,19 +84,12 @@ namespace Task_Tracker
             command.Connection.Close();
         }
 
-
-
-
-
-
-
-
-
-
-        private string connectionString = "server=localhost;user id=armantas;Password=armantas;database=task_manager;persist security info=False";
+        
 
         public void TestMysqlConnection()
         {
+
+            string connectionString = "server=localhost;user id=armantas;Password=armantas;database=task_manager;persist security info=False";
             //define the connection reference and initialize it
             MySql.Data.MySqlClient.MySqlConnection msqlConnection = null;
             msqlConnection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
