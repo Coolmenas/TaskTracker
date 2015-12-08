@@ -72,12 +72,13 @@ namespace Task_Tracker
             con.command.Parameters.AddWithValue("@SurnameP", textBox2.Text.Trim());
             con.command.Parameters.AddWithValue("@BornP", dateTimePicker1.Value);
             con.command.Parameters.AddWithValue("@JoinedP", dateTimePicker2.Value);
-            con.command.Parameters.AddWithValue("@TelephoneP", textBox3.Text.Trim());
-            con.command.Parameters.AddWithValue("@AddressP", textBox4.Text.Trim());
+            con.command.Parameters.AddWithValue("@TelephoneP", textBox4.Text.Trim());
+            con.command.Parameters.AddWithValue("@AddressP", textBox3.Text.Trim());
             con.command.Parameters.AddWithValue("@TeamIdP", comboBox1.SelectedValue);
 
             con.NonQueryEx("Worker " + textBox1.Text.Trim() + " created");
-            //MessageBox.Show("Worker " + textBox1.Text.Trim() + " created");
+            var principalForm = Application.OpenForms.OfType<Form1>().Single();
+            principalForm.refresh();
         }
 
         private bool verifyData()

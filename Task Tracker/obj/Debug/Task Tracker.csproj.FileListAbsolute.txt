@@ -21,3 +21,4 @@ C:\Users\Arma\Documents\Visual Studio 2013\Projects\TaskTracker\Task Tracker\obj
 C:\Users\Arma\Documents\Visual Studio 2013\Projects\TaskTracker\Task Tracker\obj\Debug\Task_Tracker.NewTeam.resources
 C:\Users\Arma\Documents\Visual Studio 2013\Projects\TaskTracker\Task Tracker\obj\Debug\Task_Tracker.NewTask.resources
 C:\Users\Arma\Documents\Visual Studio 2013\Projects\TaskTracker\Task Tracker\obj\Debug\Task_Tracker.EditWorker.resources
+C:\Users\Arma\Documents\Visual Studio 2013\Projects\TaskTracker\Task Tracker\obj\Debug\Task_Tracker.EditTask.resources

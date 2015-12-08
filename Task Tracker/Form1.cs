@@ -174,7 +174,8 @@ namespace Task_Tracker
             }
             else
             {
-
+                EditTask editTask = new EditTask(treeView1.SelectedNode.Name);
+                editTask.Show();
             }
         }
 
@@ -184,17 +185,84 @@ namespace Task_Tracker
 
         public void refresh()
         {
-            int id = treeView1.SelectedNode.Index;
+            string path = treeView1.SelectedNode.FullPath;
+
+           
             LoadTreeView();
+
+            var path_list = path.Split('\\').ToList();
+            foreach (TreeNode node in treeView1.Nodes)
+                if (path_list.Count > 0) 
+                    if (node.Text == path_list[0])
+                        ExpandOnPath(node, path_list);
+            
             try
             {
-                treeView1.SelectedNode = treeView1.Nodes[id];
+                    LoadDataGridView(treeView1.SelectedNode.Level);
             }
             catch (Exception)
             {
                 
             }
             
+        }
+
+        private void ExpandOnPath(TreeNode node, List<string> path)
+        {
+            path.RemoveAt(0);
+
+            node.Expand();
+
+            if (path.Count == 0)
+                return;
+            TreeNode selected = treeView1.Nodes[0];
+            foreach (TreeNode mynode in node.Nodes)
+                if (mynode.Text == path[0])
+                {
+                    selected = mynode;
+                    ExpandOnPath(mynode, path); //recursive call
+                    break;
+                }
+            treeView1.SelectedNode = selected;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode.Level == 0)
+            {
+                con.SqlQuery("DELETE teams.*, workers.*, tasks.* FROM teams LEFT JOIN workers ON teams.Id = workers.TeamId LEFT JOIN tasks ON tasks.workerId = workers.Id WHERE teams.Id = \"" + treeView1.SelectedNode.Name + '"');
+                con.NonQueryEx();
+
+                MessageBox.Show("Team " + treeView1.SelectedNode.Name + " deleted");
+                var principalForm = Application.OpenForms.OfType<Form1>().Single();
+                principalForm.refresh();
+            }
+            else if (treeView1.SelectedNode.Level == 1)
+            {
+                con.SqlQuery("DELETE FROM tasks WHERE WorkerId = \"" + treeView1.SelectedNode.Name + '"');
+                con.NonQueryEx();
+
+                con.SqlQuery("DELETE FROM workers WHERE Id = \"" + treeView1.SelectedNode.Name + '"');
+                con.NonQueryEx();
+
+                MessageBox.Show("Worker " + treeView1.SelectedNode.Name + " deleted");
+                var principalForm = Application.OpenForms.OfType<Form1>().Single();
+                principalForm.refresh();
+            }
+            else
+            {
+                con.SqlQuery("DELETE FROM tasks WHERE Id = \"" + treeView1.SelectedNode.Name + '"');
+                con.NonQueryEx();
+                MessageBox.Show("Task " + treeView1.SelectedNode.Name + " deleted");
+                var principalForm = Application.OpenForms.OfType<Form1>().Single();
+                principalForm.refresh();
+                
+            }
+        }
+
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Author: Armantas Vaskelis\n Purpose:  SCIIL Baltic test");
         }
     }
 }

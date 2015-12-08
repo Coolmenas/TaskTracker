@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-//using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -56,15 +55,12 @@ namespace Task_Tracker
             while (reader.Read())
             {
                 comboBoxValues.Add(reader[0].ToString(), reader["Name"].ToString());
-                //MessageBox.Show(reader["Id"].ToString());
             }
             con.ConnectionClose();
-            //MessageBox.Show(reader["Name"].ToString());
+
             comboBox1.DataSource = new BindingSource(comboBoxValues, null);
             comboBox1.DisplayMember = "Value";
             comboBox1.ValueMember = "Key";
-
-
 
         }
 
@@ -86,8 +82,8 @@ namespace Task_Tracker
             con.command.Parameters.AddWithValue("@SurnameP", textBox2.Text.Trim());
             con.command.Parameters.AddWithValue("@BornP", dateTimePicker1.Value);
             con.command.Parameters.AddWithValue("@JoinedP", dateTimePicker2.Value);
-            con.command.Parameters.AddWithValue("@TelephoneP", textBox3.Text.Trim());
-            con.command.Parameters.AddWithValue("@AddressP", textBox4.Text.Trim());
+            con.command.Parameters.AddWithValue("@TelephoneP", textBox4.Text.Trim());
+            con.command.Parameters.AddWithValue("@AddressP", textBox3.Text.Trim());
             con.command.Parameters.AddWithValue("@TeamIdP", comboBox1.SelectedValue);
 
             con.NonQueryEx();
