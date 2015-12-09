@@ -20,7 +20,6 @@ namespace Task_Tracker
             InitializeComponent();
             con = new SqlConnect();
             loadTeams();
-
         }
 
         private void loadTeams()
@@ -34,10 +33,8 @@ namespace Task_Tracker
             while (reader.Read())
             {
                 comboBoxValues.Add(reader[0].ToString(), reader["Name"].ToString());
-                //MessageBox.Show(reader["Id"].ToString());
             }
             con.ConnectionClose();
-            //MessageBox.Show(reader["Name"].ToString());
             comboBox1.DataSource = new BindingSource(comboBoxValues, null);
             comboBox1.DisplayMember = "Value";
             comboBox1.ValueMember = "Key";
@@ -51,25 +48,15 @@ namespace Task_Tracker
             reader = con.QueryEx();
 
             Dictionary<string, string> comboBoxValues = new Dictionary<string, string>();
-            //comboBoxValues.Add(1, "dfdfdf");
-            //comboBoxValues.Add(2, "d23a");
-            //comboBoxValues.Add(4, "d124156787s");
-
-
-            // Get combobox selection (in handler)
-            //string value = ((KeyValuePair<string, string>)comboBox1.SelectedItem).Key;
-
-
 
             comboBox2.Hide();
             button1.Enabled= false;
             while (reader.Read())
             {
                 comboBoxValues.Add(reader["Id"].ToString(), reader["Name"].ToString());
-                //MessageBox.Show(reader["Id"].ToString()+ reader["Name"].ToString());
             }
             con.ConnectionClose();
-            //MessageBox.Show(reader["Name"].ToString());
+
             if (comboBoxValues.Count > 0)
             {
                 comboBox2.DataSource = new BindingSource(comboBoxValues, null);
@@ -103,7 +90,6 @@ namespace Task_Tracker
             con.command.Parameters.AddWithValue("@WorkerId", comboBox2.SelectedValue);
 
             con.NonQueryEx("Task " + textBox1.Text.Trim() + " created");
-            //MessageBox.Show("Worker " + textBox1.Text.Trim() + " created");
             var principalForm = Application.OpenForms.OfType<Form1>().Single();
             principalForm.refresh();
         }

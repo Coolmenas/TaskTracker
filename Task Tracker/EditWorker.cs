@@ -21,14 +21,13 @@ namespace Task_Tracker
             this.workerId = workerId;
             InitializeComponent();
             con = new SqlConnect();
-            loadData();
-            
+            loadData(); 
         }
 
         private void loadData()
         {
-            loadTeams();
-//--------------------------------fill other data--------------------------------
+            loadTeams();// loads the combobox for team selection
+//--------------------------------fills other data--------------------------------
             con.SqlQuery("SELECT * FROM workers WHERE Id = \"" + workerId + '"');
             reader = con.QueryEx();
             while (reader.Read())
@@ -46,7 +45,6 @@ namespace Task_Tracker
 
         private void loadTeams()
         {
-
             con.SqlQuery("SELECT * FROM TEAMS ");
             reader = con.QueryEx();
 
@@ -61,7 +59,6 @@ namespace Task_Tracker
             comboBox1.DataSource = new BindingSource(comboBoxValues, null);
             comboBox1.DisplayMember = "Value";
             comboBox1.ValueMember = "Key";
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -71,12 +68,10 @@ namespace Task_Tracker
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             if (verifyData() == false)
             {
                 return;
             }
-
             con.SqlQuery("UPDATE Workers SET  Name = @NameP, Surname = @SurnameP,  Born = @BornP , Joined = @JoinedP, Telephone = @TelephoneP, Address = @AddressP, TeamId = @TeamIdP WHERE Id = \"" + workerId + '"');
             con.command.Parameters.AddWithValue("@NameP", textBox1.Text.Trim());
             con.command.Parameters.AddWithValue("@SurnameP", textBox2.Text.Trim());

@@ -52,8 +52,6 @@ namespace Task_Tracker
                 con.command.Parameters.AddWithValue("@NameP", textBox1.Text.Trim());
                 con.command.Parameters.AddWithValue("@DateP", dateTimePicker1.Value);
                 con.command.Parameters.AddWithValue("@DescriptionP", textBox2.Text);
-
-                //con.SqlQuery("UPDATE Teams SET  Name = '" + textBox1.Text.Trim() + "',  Date  = '" + dateTimePicker1.Value + "', Description = '" + textBox2.Text + "' WHERE Id = \"" + teamId + '"');
                 con.NonQueryEx();
                 MessageBox.Show("Team " + textBox1.Text.Trim() + " updated");
             }

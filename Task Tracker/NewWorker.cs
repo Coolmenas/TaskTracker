@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-//using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -25,34 +24,18 @@ namespace Task_Tracker
 
         private void loadTeams()
         {
-
             con.SqlQuery("SELECT * FROM TEAMS ");
             reader = con.QueryEx();
 
             Dictionary<string, string> comboBoxValues = new Dictionary<string, string>();
-            //comboBoxValues.Add(1, "dfdfdf");
-            //comboBoxValues.Add(2, "d23a");
-            //comboBoxValues.Add(4, "d124156787s");
-           
-
-            // Get combobox selection (in handler)
-            //string value = ((KeyValuePair<string, string>)comboBox1.SelectedItem).Key;
-            
-
-
 
             while (reader.Read()){
                 comboBoxValues.Add(reader[0].ToString(), reader["Name"].ToString());
-                //MessageBox.Show(reader["Id"].ToString());
             }
             con.ConnectionClose();
-            //MessageBox.Show(reader["Name"].ToString());
             comboBox1.DataSource = new BindingSource(comboBoxValues, null);
             comboBox1.DisplayMember = "Value";
             comboBox1.ValueMember = "Key";
-
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -62,7 +45,6 @@ namespace Task_Tracker
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             if (verifyData() == false)
             {
                 return;
@@ -90,6 +72,5 @@ namespace Task_Tracker
             }
             else return true;
         }
-
     }
 }

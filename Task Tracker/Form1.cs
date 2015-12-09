@@ -41,23 +41,9 @@ namespace Task_Tracker
                 con.SqlQuery("SELECT  Name, Description, DateDue FROM tasks WHERE WorkerId  = \"" + treeView1.SelectedNode.Parent.Name.ToString() + '"');
                 reader = con.QueryEx();
             }
-            //if (treeView1.SelectedNode.Level == 0) level = "teams";
-           // else if (treeView1.SelectedNode.Level == 1) level = "workers";
-           // else level = "tasks";
-           
-
-            //Dictionary<string, string> dataGridViewValues = new Dictionary<string, string>();
-            //while (reader.Read())
-            //{
-            //    dataGridViewValues.Add(reader["Id"].ToString(), reader["Name"].ToString());
-            //    //treeView1.Nodes[reader["TeamId"].ToString()].Nodes[reader["WorkerId"].ToString()].Nodes.Add(reader["Id"].ToString(), reader["Name"].ToString());
-            //    //MessageBox.Show(reader["Id"].ToString());
-            //}
-
             dt.Load(reader);
             con.ConnectionClose();
             dataGridView1.DataSource = dt;
-            //throw new NotImplementedException();
         }
 
         public void LoadTreeView()
@@ -66,39 +52,27 @@ namespace Task_Tracker
             //-----------------------------------------------Fill first level--------------------------------------------------------------------
             con.SqlQuery("SELECT * FROM TEAMS ");
             reader = con.QueryEx();
-
             while (reader.Read())
             {
                 treeView1.Nodes.Add(reader["Id"].ToString(),reader["Name"].ToString());
-                //MessageBox.Show(reader["Id"].ToString());
             }
             con.ConnectionClose();
-
-
             //------------------------------------------------------Fill second level-------------------------------------------------------------
             con.SqlQuery("SELECT * FROM workers ");
             reader = con.QueryEx();
-
             while (reader.Read())
             {
                 treeView1.Nodes[reader["TeamId"].ToString()].Nodes.Add(reader["Id"].ToString(), reader["Name"].ToString());
-                //MessageBox.Show(reader["Id"].ToString());
             }
             con.ConnectionClose();
-
-
             //------------------------------------------------------------Fill third level-------------------------------------------------------
             con.SqlQuery("SELECT workers.TeamId, tasks.WorkerId, tasks.Name, tasks.Id FROM tasks INNER JOIN workers on tasks.WorkerId = workers.Id ");
             reader = con.QueryEx();
-
             while (reader.Read())
             {
                 treeView1.Nodes[reader["TeamId"].ToString()].Nodes[reader["WorkerId"].ToString()].Nodes.Add(reader["Id"].ToString(), reader["Name"].ToString());
-                //MessageBox.Show(reader["Id"].ToString());
             }
-            con.ConnectionClose();
-
-            
+            con.ConnectionClose();         
         }
 
         private void workerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -126,8 +100,6 @@ namespace Task_Tracker
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            
-           // MessageBox.Show(treeView1.SelectedNode.Name.ToString());
             var selectedNode = treeView1.SelectedNode;
             if (selectedNode.Level == 0)
             {
@@ -142,7 +114,6 @@ namespace Task_Tracker
                 else
                 {
                     LoadDataGridView(selectedNode.Level);
-                    //MessageBox.Show("task");
                 }
             }    
         }
@@ -179,14 +150,9 @@ namespace Task_Tracker
             }
         }
 
-        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
-        {   
-        }
-
         public void refresh()
         {
             string path = treeView1.SelectedNode.FullPath;
-
            
             LoadTreeView();
 

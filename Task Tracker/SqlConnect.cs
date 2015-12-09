@@ -16,8 +16,7 @@ namespace Task_Tracker
 
         public   SqlConnect()
         {
-            _connection = new MySqlConnection("server=localhost;user id=armantas;Password=armantas;database=task_manager;persist security info=False;Convert Zero Datetime=True");
-         
+            _connection = new MySqlConnection("server=localhost;user id=armantas;Password=armantas;database=task_manager;persist security info=False;Convert Zero Datetime=True");    
         }
 
         public void SqlQuery(string queryText)
@@ -61,7 +60,7 @@ namespace Task_Tracker
                 _connection.Close();
             }
         }
-        public void NonQueryEx(string message)
+        public void NonQueryEx(string message)//same as with non parameter version just displays a message if succesfull.
         {
             try
             {
@@ -84,49 +83,44 @@ namespace Task_Tracker
             command.Connection.Close();
         }
 
-        
+        //public void TestMysqlConnection()
+        //{
 
-        public void TestMysqlConnection()
-        {
+        //    string connectionString = "server=localhost;user id=armantas;Password=armantas;database=task_manager;persist security info=False";
+        //    //define the connection reference and initialize it
+        //    MySql.Data.MySqlClient.MySqlConnection msqlConnection = null;
+        //    msqlConnection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+        //    //define the command reference
+        //    MySql.Data.MySqlClient.MySqlCommand msqlCommand = new MySql.Data.MySqlClient.MySqlCommand();
+        //    //define the connection used by the command object
+        //    msqlCommand.Connection = msqlConnection;
+        //    //define the command text
 
-            string connectionString = "server=localhost;user id=armantas;Password=armantas;database=task_manager;persist security info=False";
-            //define the connection reference and initialize it
-            MySql.Data.MySqlClient.MySqlConnection msqlConnection = null;
-            msqlConnection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
-            //define the command reference
-            MySql.Data.MySqlClient.MySqlCommand msqlCommand = new MySql.Data.MySqlClient.MySqlCommand();
-            //define the connection used by the command object
-            msqlCommand.Connection = msqlConnection;
-            //define the command text
+        //    msqlCommand.CommandText = "SELECT * FROM workers;";
 
-            msqlCommand.CommandText = "SELECT * FROM workers;";
+        //    try
+        //    {
+        //        //open the connection
+        //        msqlConnection.Open();
+        //        //use a DataReader to process each record
+        //        MySql.Data.MySqlClient.MySqlDataReader msqlReader = msqlCommand.ExecuteReader();
 
-            try
-            {
-                //open the connection
-                msqlConnection.Open();
-                //use a DataReader to process each record
-                MySql.Data.MySqlClient.MySqlDataReader msqlReader = msqlCommand.ExecuteReader();
-
-                while (msqlReader.Read())
-                {
-                    MessageBox.Show(msqlReader["Name"].ToString());
-                    //do something with each record
-                }
-            }
-            catch (Exception er)
-            {
-                MessageBox.Show(er.Message);
-                //do something with the exception
-            }
-            finally
-            {
-                //always close the connection
-                msqlConnection.Close();
-            }
-        }
-
-        
-
+        //        while (msqlReader.Read())
+        //        {
+        //            MessageBox.Show(msqlReader["Name"].ToString());
+        //            //do something with each record
+        //        }
+        //    }
+        //    catch (Exception er)
+        //    {
+        //        MessageBox.Show(er.Message);
+        //        //do something with the exception
+        //    }
+        //    finally
+        //    {
+        //        //always close the connection
+        //        msqlConnection.Close();
+        //    }
+        //}
     }
 }

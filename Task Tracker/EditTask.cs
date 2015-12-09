@@ -30,7 +30,6 @@ namespace Task_Tracker
         {
             loadTeams();
 
-
             string workerId = "" ;
             string teamId = "";
             con.SqlQuery("SELECT * FROM tasks WHERE Id = \"" + taskId + '"');
@@ -59,7 +58,6 @@ namespace Task_Tracker
 
         private void loadTeams()
         {
-
             con.SqlQuery("SELECT * FROM TEAMS ");
             reader = con.QueryEx();
 
@@ -79,7 +77,6 @@ namespace Task_Tracker
         private void loadWorkers()
         {
             con.SqlQuery("SELECT * FROM workers WHERE TeamId = \"" + comboBox1.SelectedValue + '"');
-            //MessageBox.Show(comboBox1.SelectedValue.ToString());
             reader = con.QueryEx();
 
             Dictionary<string, string> comboBoxValues = new Dictionary<string, string>();
